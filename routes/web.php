@@ -18,5 +18,12 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Route Khusus Admin (Wajib Login dulu)
 Route::middleware(['auth'])->group(function () {
-    Route::post('/transactions', [TransactionController::class, 'store']);
+    Route::post('/transactions', [TransactionController::class, 'store'])
+        ->name('transactions.store');
+
+    Route::put('/transactions/{transaction}', [TransactionController::class, 'update'])
+        ->name('transactions.update');
+
+    Route::delete('/transactions/{transaction}', [TransactionController::class, 'destroy'])
+        ->name('transactions.destroy');
 });

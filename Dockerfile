@@ -37,6 +37,9 @@ RUN sed -ri \
     's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' \
     /etc/apache2/apache2.conf
 
+# Izinkan Apache membaca .htaccess
+RUN sed -i '/<Directory ${APACHE_DOCUMENT_ROOT}>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+
 WORKDIR /var/www/html
 
 # Salin project
